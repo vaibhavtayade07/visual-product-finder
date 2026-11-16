@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Catalog admin — Visual finder</title>
+  <link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+  <header class="topbar">
+    <strong>Lumen &amp; Co</strong>
+    <span class="muted">Catalog admin</span>
+    <span class="badge" id="mode-badge">{{ app_mode }} mode</span>
+  </header>
+
+  <main class="wrap" id="admin" data-api="{{ api_base }}" data-token="{{ default_admin_token }}">
+    <h1>Catalog indexing</h1>
+
+    <section class="card">
+      <label class="field">Admin token
+        <input type="password" id="token" placeholder="Bearer token">
+      </label>
+      <p class="muted">Stored in this browser only. Mock mode pre-fills the dev token.</p>
+    </section>
+
+    <div class="admin-grid">
+      <section class="card">
+        <h2>Build index</h2>
+        <p class="muted">Upload a CSV (<code>sku,title,price,stock,image_url</code> required) or generate the mock catalog.</p>
+        <label class="btn secondary">Upload CSV
+          <input type="file" id="csv-input" accept=".csv,text/csv" hidden>
+        </label>
+        <div class="upload-row" style="margin-top:.6rem">
+          <label class="field" style="max-width:120px">Mock count
+            <input type="number" id="mock-count" value="300" min="1" max="5000">
+          </label>
+          <button class="btn primary" id="mock-btn">Build index (mock)</button>
+          <button class="btn secondary" id="shopify-btn"
+                  {% if not shopify_configured %}disabled title="Set SHOPIFY_SHOP_DOMAIN and SHOPIFY_ADMIN_TOKEN"{% endif %}>
+            Import from Shopify
+          </button>
+        </div>
+        <p class="muted" id="shopify-hint">
+          {% if shopify_configured %}
+            Shopify source: active products from <code>{{ shopify_shop_domain }}</code>.
+          {% else %}
+            Shopify disabled: set <code>SHOPIFY_SHOP_DOMAIN</code> and <code>SHOPIFY_ADMIN_TOKEN</code> in .env.
+          {% endif %}
+        </p>
+        <p class="error" id="import-error" hidden></p>
+        <div id="import-status" hidden>
+          <p id="import-summary"></p>
+          <table id="import-counts"></table>
+          <details id="validation-details" hidden>
+            <summary>Validation / row issues (<span id="validation-count">0</span>)</summary>
+            <table id="validation-table"></table>
+          </details>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Hygiene report</h2>
+        <div class="upload-row">
+          <button class="btn secondary" id="hygiene-btn">Refresh</button>
+          <a class="btn ghost small" id="hygiene-csv" href="#">Download CSV</a>
+        </div>
+        <p id="hygiene-summary" class="muted">Run an import, then refresh.</p>
+        <div id="hygiene-findings"></div>
+      </section>
+
+      <section class="card">
+        <h2>Reindex one SKU</h2>
+        <div class="upload-row">
+          <input type="text" id="reindex-sku" placeholder="LMP-1001" style="padding:.5rem;border:1px solid var(--line);border-radius:8px">
+          <button class="btn secondary" id="reindex-btn">Reindex</button>
+        </div>
+        <p id="reindex-result" class="muted"></p>
+      </section>
+
+      <section class="card">
+        <h2>Config (tunables)</h2>
+        <p class="muted">Weights, thresholds, retention, caps. Applied without redeploy.</p>
+        <textarea id="config-json" rows="14" style="width:100%;font-family:monospace;font-size:.82rem"></textarea>
+        <div class="upload-row" style="margin-top:.5rem">
+          <button class="btn primary" id="config-save">Save config</button>
+          <button class="btn ghost" id="config-reload">Reload</button>
+        </div>
+        <p id="config-result" class="muted"></p>
+      </section>
+    </div>
+  </main>
+
+  <script src="/static/admin.js"></script>
+</body>
+</html>

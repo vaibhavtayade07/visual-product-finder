@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Find a lamp by photo</title>
+  <link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+  <header class="topbar">
+    <strong>Lumen &amp; Co</strong>
+    <span class="muted">Visual finder</span>
+  </header>
+
+  <main class="wrap" id="finder" data-api="{{ api_base }}" data-tenant="{{ tenant_slug }}"
+        data-consent="{{ consent_version }}" data-retention="{{ retention_days }}">
+    <h1>Show us a lamp you like.</h1>
+    <p class="lead">We'll find the closest matches in our store. No typing, no lamp jargon.</p>
+
+    <section class="consent card">
+      <label class="checkline">
+        <input type="checkbox" id="consent-box">
+        <span>I agree that my photo is used only to find matching products, is stored up to
+          {{ retention_days }} days for quality/debugging, can be deleted on request, and is
+          never used for model training.</span>
+      </label>
+    </section>
+
+    <section class="card">
+      <div class="upload-row">
+        <label class="btn secondary">
+          Choose a photo
+          <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp,image/heic,image/heif" hidden>
+        </label>
+        <label class="btn secondary">
+          Take a photo
+          <input type="file" id="camera-input" accept="image/*" capture="environment" hidden>
+        </label>
+      </div>
+
+      <p id="client-error" class="error" hidden></p>
+      <p id="photo-warn" class="warn" hidden></p>
+
+      <div id="preview-wrap" hidden>
+        <img id="preview" alt="Your photo">
+        <div class="upload-row">
+          <button class="btn primary" id="submit-btn">Find matches</button>
+          <button class="btn ghost" id="retake-btn">Retake / change</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="progress" class="card" hidden>
+      <div class="skeleton-grid" aria-hidden="true"><div></div><div></div><div></div><div></div></div>
+      <p class="muted" id="progress-text">Looking through the catalog…</p>
+    </section>
+
+    <section id="error-view" class="card" hidden>
+      <p class="error" id="error-text"></p>
+      <button class="btn primary" id="retry-btn">Try again</button>
+    </section>
+
+    <section id="results-section" hidden>
+      <div class="results-head">
+        <h2 id="results-title">Closest matches</h2>
+        <button class="btn ghost small" id="delete-photo-btn" title="Delete my photo">Delete my photo</button>
+      </div>
+      <p id="degraded-banner" class="warn" hidden>Style matches (still refining)…</p>
+      <div id="filters" class="filters" hidden></div>
+      <div id="results" class="grid"></div>
+      <div id="refine-fallback" class="card" hidden>
+        <p id="refine-fallback-text"></p>
+        <button class="btn ghost small" id="clear-filters-btn">Clear filters</button>
+      </div>
+    </section>
+
+    <section id="fallback-section" class="card" hidden>
+      <h2>We couldn't find a close match</h2>
+      <p class="muted">You can leave your details and we'll reach out if we source something close.</p>
+      <form id="lead-form">
+        <div class="field"><label>Name <input type="text" name="name" autocomplete="name"></label></div>
+        <div class="field"><label>Email <input type="email" name="email" autocomplete="email"></label></div>
+        <div class="field"><label>Phone <input type="tel" name="phone" autocomplete="tel"></label></div>
+        <div class="field"><label>Note <input type="text" name="note" placeholder="Anything else we should know?"></label></div>
+        <p class="error" id="lead-error" hidden></p>
+        <button class="btn primary" type="submit">Request this product</button>
+      </form>
+      <p class="success" id="lead-success" hidden>We'll contact you if we find a match</p>
+      <h3>Popular right now</h3>
+      <div id="popular" class="grid small"></div>
+    </section>
+  </main>
+
+  <script src="/static/find.js"></script>
+</body>
+</html>

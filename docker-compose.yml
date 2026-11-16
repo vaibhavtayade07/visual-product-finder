@@ -1,0 +1,35 @@
+# Local dev database. `docker compose up -d db`
+# The app itself can also run in Docker via: docker compose --profile app up -d
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: finder
+      POSTGRES_PASSWORD: finder
+      POSTGRES_DB: finder
+    ports:
+      # host 5433: avoids clashing with other local Postgres instances on 5432
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U finder -d finder"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  app:
+    profiles: ["app"]
+    build: .
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql://finder:finder@db:5432/finder
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+
+volumes:
+  pgdata:

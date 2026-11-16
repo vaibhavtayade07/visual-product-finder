@@ -1,0 +1,15 @@
+[
+  {"image": "data/mock_images/lmp-1001.png", "expected_skus": ["LMP-1001"], "notes": "exact mock catalog image"},
+  {"image": "data/mock_images/lmp-1002.png", "expected_skus": ["LMP-1002"], "notes": "exact mock catalog image"},
+  {"image": "data/mock_images/lmp-1003.png", "expected_skus": ["LMP-1003"], "notes": "exact mock catalog image"},
+  {"image": "data/mock_images/lmp-1004.png", "expected_skus": ["LMP-1004", "LMP-1005"], "notes": "byte-identical duplicate pair (E11)"},
+  {"image": "data/mock_images/lmp-1006.png", "expected_skus": ["LMP-1006"], "notes": "exact mock catalog image"},
+  {"image": "data/mock_images/lmp-1007.png", "expected_skus": ["LMP-1007"], "notes": "exact mock catalog image"},
+  {"image": "data/mock_images/lmp-1008.png", "expected_skus": ["LMP-1008"], "notes": "exact mock catalog image"},
+  {"image": "data/mock_images/lmp-1009.png", "expected_skus": ["LMP-1009"], "notes": "exact mock catalog image"},
+  {"image": "data/mock_images/lmp-1010.png", "expected_skus": ["LMP-1010"], "notes": "exact mock catalog image"},
+  {"image": "data/mock_images/lmp-1011.png", "expected_skus": ["LMP-1011"], "notes": "exact mock catalog image"},
+  {"image": "data/mock_images/lmp-1012.png", "expected_skus": ["LMP-1012"], "notes": "exact mock catalog image"},
+  {"image": "data/mock_images/lmp-1013.png", "expected_skus": ["LMP-1013"], "notes": "exact mock catalog image"},
+  {"image": "data/mock_images/lmp-1014.png", "expected_skus": ["LMP-1014"], "notes": "exact mock catalog image"}
+]

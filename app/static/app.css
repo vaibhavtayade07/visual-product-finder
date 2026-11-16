@@ -1,0 +1,69 @@
+:root {
+  --ink: #1c1d20;
+  --muted: #6b6f76;
+  --line: #e4e2dd;
+  --bg: #faf9f7;
+  --card: #ffffff;
+  --accent: #8a6d3b;
+  --accent-ink: #fff;
+  --error: #b42318;
+  --warn: #915930;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink);
+  font: 16px/1.45 "Segoe UI", system-ui, -apple-system, sans-serif; }
+.topbar { display: flex; gap: .75rem; align-items: baseline; padding: .9rem 1.25rem;
+  background: var(--card); border-bottom: 1px solid var(--line); }
+.wrap { max-width: 880px; margin: 0 auto; padding: 1.25rem 1rem 4rem; }
+h1 { font-size: 1.6rem; margin: .5rem 0 .25rem; }
+h2 { font-size: 1.2rem; margin: .25rem 0 .75rem; }
+h3 { font-size: 1rem; margin: 1.25rem 0 .5rem; }
+.lead { color: var(--muted); margin-top: 0; }
+.muted { color: var(--muted); }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+  padding: 1rem; margin: .9rem 0; }
+.btn { display: inline-block; border-radius: 8px; border: 1px solid var(--line);
+  padding: .6rem .95rem; font-size: .95rem; cursor: pointer; background: var(--card); color: var(--ink); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.btn.ghost { background: transparent; }
+.btn.small { padding: .35rem .6rem; font-size: .85rem; }
+.btn:disabled { opacity: .55; cursor: default; }
+.upload-row { display: flex; gap: .6rem; flex-wrap: wrap; align-items: center; }
+.upload-row label.btn input { display: none; }
+#preview { max-width: min(420px, 100%); max-height: 320px; display: block;
+  border-radius: 8px; border: 1px solid var(--line); margin-bottom: .75rem; object-fit: contain; }
+.error { color: var(--error); }
+.warn { color: var(--warn); }
+.success { color: #1d6f42; }
+.checkline { display: flex; gap: .6rem; align-items: flex-start; font-size: .9rem; }
+.skeleton-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: .75rem; }
+.skeleton-grid div { height: 180px; border-radius: 10px; background: linear-gradient(100deg, #ecebe8 40%, #f6f5f2 50%, #ecebe8 60%);
+  background-size: 200% 100%; animation: shimmer 1.2s infinite; }
+@keyframes shimmer { to { background-position: -200% 0; } }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: .9rem; }
+.grid.small { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+.card-product { background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+  overflow: hidden; display: flex; flex-direction: column; }
+.card-product img { width: 100%; height: 170px; object-fit: contain; background: #f4f2ef; }
+.card-product .body { padding: .6rem .7rem .75rem; display: flex; flex-direction: column; gap: .3rem; }
+.card-product .title { font-size: .92rem; font-weight: 600; }
+.card-product .price { font-weight: 600; }
+.card-product .reason { font-size: .8rem; color: var(--muted); min-height: 2.2em; }
+.badge { display: inline-block; font-size: .72rem; border-radius: 999px; padding: .12rem .5rem; border: 1px solid var(--line); }
+.badge.in_stock { background: #e8f5ec; border-color: #bfe3cb; }
+.badge.low_stock { background: #fdf3e4; border-color: #f0d9ac; }
+.badge.out_of_stock { background: #f4f4f4; color: var(--muted); }
+.badge.label { background: #efe9dd; border-color: #e2d6bd; }
+.filters { display: flex; flex-wrap: wrap; gap: .45rem; margin: .6rem 0; }
+.chip { border: 1px solid var(--line); background: var(--card); border-radius: 999px;
+  padding: .3rem .7rem; font-size: .82rem; cursor: pointer; }
+.chip.active { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.field { margin: .45rem 0; display: flex; flex-direction: column; max-width: 380px; }
+.field input { padding: .5rem .6rem; border: 1px solid var(--line); border-radius: 8px; margin-top: .2rem; }
+.results-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+.admin-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: .9rem; }
+table { border-collapse: collapse; width: 100%; font-size: .88rem; }
+th, td { text-align: left; border-bottom: 1px solid var(--line); padding: .35rem .4rem; vertical-align: top; }
+code, pre { background: #f1efe9; border-radius: 6px; padding: .1rem .35rem; font-size: .85rem; }
+pre { padding: .7rem; overflow: auto; }
+details summary { cursor: pointer; font-weight: 600; margin: .4rem 0; }

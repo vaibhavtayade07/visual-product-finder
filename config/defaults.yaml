@@ -1,0 +1,35 @@
+# Tenants are seeded with this file merged into tenants.config (architecture §8).
+weights:
+  visual: 0.60
+  attribute: 0.30
+  boost: 0.10
+thresholds:
+  high: 0.75
+  mid: 0.55
+category_confidence_gate: 0.50
+top_k_retrieve: 50
+rerank_k: 10
+top_n_cards: 10
+reason_max_chars: 120
+business_boost:
+  in_stock: 1.0
+  low_stock: 0.6
+  out_of_stock: 0.2
+degrade:
+  llm_timeout_s: 20
+embed:
+  timeout_s: 8
+  retries: 2
+retention_days: 30
+query_cap_monthly: 10000
+cost_guard: block            # warn | degrade | block
+rate_limit:
+  ip_per_min: 10
+adapters:
+  catalog: csv               # csv | mock | shopify (needs SHOPIFY_* env; woo = stub)
+embedding:
+  model: multimodalembedding@001
+  dim: 1408
+storefront:
+  base_url: "https://store.example"
+  product_url_template: "{base}/products/{sku}"
